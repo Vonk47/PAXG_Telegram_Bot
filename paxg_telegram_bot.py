@@ -1,11 +1,16 @@
 import requests
 import time
+import os
 from datetime import datetime
 
-# Configuration
-BOT_TOKEN = '7259125845:AAHXr5yvZ8FGqX7OcWv3cNri6OYZXgM01ZI'  # Get from @BotFather
-CHANNEL_ID = '-1002991940145'  # Your channel ID (e.g., -1001234567890)
+# Configuration - Read from environment variables
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
+CHANNEL_ID = os.environ.get('CHANNEL_ID')
 INTERVAL = 300  # 5 minutes in seconds
+
+# Validate that required environment variables are set
+if not BOT_TOKEN or not CHANNEL_ID:
+    raise ValueError("BOT_TOKEN and CHANNEL_ID environment variables must be set!")
 
 def get_paxg_price():
     """Fetch PAXG price from CoinGecko API"""
